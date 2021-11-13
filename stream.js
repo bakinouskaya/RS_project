@@ -1,16 +1,15 @@
 import fs from 'fs';
 import { Transform,pipeline } from 'stream';
-import  { operations, input as filename, output } from './main.js';
+import  { operations, input, output } from './main.js';
 import { CaesarDecode, CaesarEncode } from './caesar.js';
-// console.log(filename);
-let d1;
-let stream = new fs.ReadStream(filename, {encoding: 'utf-8'});
-let newStream = new fs.WriteStream('./newStream.txt');
+
+
+let stream = new fs.ReadStream(input, {encoding: 'utf-8'});
+let newStream = new fs.WriteStream(output);
 let transform = new Transform({
     writableObjectMode: true,
     transform(chunk) {
       operations.map(function(element){
-      // let _this = this;
         if(element === 'C1'){
           transform.push(CaesarDecode(chunk));
         }
@@ -19,32 +18,16 @@ let transform = new Transform({
         }
       })
       this.push(CaesarDecode(chunk));
-      // callback();  
     }  
   });
-  
 
-// stream.on('data', function(chunck){
-//     let data = stream.read();
-//     console.log(data);
-    // newStream.write(chunck);
-// })
- 
-// const transform = new Transform({
-//     writableObjectMode: true,
-//     transform(chunk, encoding, callback) {
-//       this.push(JSON.stringify(chunk));
-//       callback();  
-//     }  
-//   });
-  
-// stream.pipe(newStream);
 pipeline(
     stream, 
     transform,
     newStream, 
     err => {
     });
+    
 
 // stream.on('end', function(){
 // })
@@ -55,4 +38,4 @@ pipeline(
 //     console.log('Can not write');
 // })
 
-export{ filename };
+
