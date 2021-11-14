@@ -1,11 +1,23 @@
-import fs, { ReadStream } from 'fs';
-import { Transform,pipeline } from 'stream';
+import fs from 'fs';
+import { Transform, pipeline, Readable} from 'stream';
 import  { operations, input, output } from './main.js';
 import { CaesarDecode, CaesarEncode } from './caesar.js';
 import { Atbash } from './atbash.js';
 
-let stream = new fs.ReadStream(input, {encoding: 'utf-8'});
-stream.push(input);
+let stream;
+stream = new fs.ReadStream(input, {encoding: 'utf-8'});
+(fs.stat(input, function(err) {
+  if (err) {
+    stream = Readable.from([input, {encoding: 'utf-8'}]);
+    console.log("Source file not found");
+  } 
+  // else {
+    // return stream = new fs.ReadStream(input, {encoding: 'utf-8'});
+    // // console.log("File found");
+  // }
+}));
+
+
 let newStream = new fs.WriteStream(output);
 let transform = new Transform({
     writableObjectMode: true,
@@ -36,14 +48,19 @@ pipeline(
     newStream, 
     err => {
     });
+
+
+// pipeline(
+//       input, 
+//       transform,
+//       newStream, 
+//       err => {
+//       });
     
 
 // stream.on('end', function(){
 // })
-stream.on('error', function(err){
-    stream.push(input);
-    console.log('Something went wrong');
-})
+
 // newStream.on('error', function(err){
 //     console.log('Can not write');
 // })
