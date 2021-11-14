@@ -15,8 +15,6 @@ console.log("File does not exist. Reading from console...");
 stream = Readable.from([input, {encoding: 'utf-8'}]);
 }
 
-
-
 let newStream = new fs.WriteStream(output);
 let transform = new Transform({
     writableObjectMode: true,
@@ -46,6 +44,7 @@ pipeline(
     transform,
     newStream, 
     err => {
+      console.log('Wrong input!')
     });
 
 
