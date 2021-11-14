@@ -4,18 +4,17 @@ import  { operations, input, output } from './main.js';
 import { CaesarDecode, CaesarEncode } from './caesar.js';
 import { Atbash } from './atbash.js';
 
-let stream;
+let stream, stats;
+
+try {
+stats = fs.statSync(input);
 stream = new fs.ReadStream(input, {encoding: 'utf-8'});
-(fs.stat(input, function(err) {
-  if (err) {
-    stream = Readable.from([input, {encoding: 'utf-8'}]);
-    console.log("Source file not found");
-  } 
-  // else {
-    // return stream = new fs.ReadStream(input, {encoding: 'utf-8'});
-    // // console.log("File found");
-  // }
-}));
+}
+catch (error) {
+console.log("File does not exist. Reading from console...");
+stream = Readable.from([input, {encoding: 'utf-8'}]);
+}
+
 
 
 let newStream = new fs.WriteStream(output);
