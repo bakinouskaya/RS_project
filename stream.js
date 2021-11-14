@@ -2,7 +2,8 @@ import fs from 'fs';
 import { Transform,pipeline } from 'stream';
 import  { operations, input, output } from './main.js';
 import { CaesarDecode, CaesarEncode } from './caesar.js';
-
+import { Atbash } from './atbash.js';
+console.log(operations)
 
 let stream = new fs.ReadStream(input, {encoding: 'utf-8'});
 let newStream = new fs.WriteStream(output);
@@ -16,8 +17,11 @@ let transform = new Transform({
         if(element === 'C0'){
           transform.push(CaesarEncode(chunk));
         }
+        if(element === 'A'){
+          transform.push(Atbash(chunk));
+        }
       })
-      this.push(CaesarDecode(chunk));
+      // this.push(transform(chunk));
     }  
   });
 
@@ -31,9 +35,9 @@ pipeline(
 
 // stream.on('end', function(){
 // })
-// stream.on('error', function(err){
-//     console.log('Something went wrong');
-// })
+stream.on('error', function(err){
+    console.log('Something went wrong');
+})
 // newStream.on('error', function(err){
 //     console.log('Can not write');
 // })
