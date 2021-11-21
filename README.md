@@ -33,3 +33,5 @@ Config validation is not implemented yet. So please don't expect exit w/o zero e
 Example
 
 node stream.js -c C0-C1-A -o output.txt -i test.txt
+
+TO TEST APP you need to run npm run test
