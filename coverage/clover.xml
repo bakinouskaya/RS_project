@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1637276480959" clover="3.2.0">
+  <project timestamp="1637276480960" name="All files">
+    <metrics statements="7" coveredstatements="7" conditionals="36" coveredconditionals="36" methods="6" coveredmethods="6" elements="49" coveredelements="49" complexity="0" loc="7" ncloc="7" packages="1" files="2" classes="2"/>
+    <file name="atbash.js" path="/Users/natallia_bakinouskaya/NODE/Task_1/atbash.js">
+      <metrics statements="2" coveredstatements="2" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
+      <line num="3" count="7" type="cond" truecount="4" falsecount="0"/>
+      <line num="10" count="1" type="stmt"/>
+    </file>
+    <file name="caesar.js" path="/Users/natallia_bakinouskaya/NODE/Task_1/caesar.js">
+      <metrics statements="5" coveredstatements="5" conditionals="28" coveredconditionals="28" methods="4" coveredmethods="4"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="9" type="cond" truecount="6" falsecount="0"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="9" type="cond" truecount="6" falsecount="0"/>
+      <line num="19" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

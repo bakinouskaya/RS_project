@@ -1,16 +1,54 @@
 
-let operations, input, output;
+let operations = '', input = '', output = '';
 
 
-let flagIndex = process.argv.indexOf('-c');
-flagIndex !== -1? operations = process.argv[flagIndex + 1].split('-'): operations;
+let flagIndex;
+flagIndex = process.argv.indexOf('-c');
+try {
+   
+    if(flagIndex !== -1 || process.argv[flagIndex + 1].length > 0 
+    ){
+        operations = process.argv[flagIndex + 1].split('-')
+    }
+     else{
+         throw error()
+     };
+}
+catch(error){
 
 
+}
 flagIndex = process.argv.indexOf('-i');
-flagIndex !== -1? input = process.argv[flagIndex + 1]:input;
+try {
+    
+    if(flagIndex !== -1 || process.argv[flagIndex + 1].trim.length > 0 
+      
+    ){
+        input = process.argv[flagIndex + 1];
+    }
+     else{
+         throw error()
+     };
+   
+}
+catch(error){
+    console.log('wrong config');
 
+}
 flagIndex = process.argv.indexOf('-o');
-flagIndex !== -1? output = process.argv[flagIndex + 1]: output;
+try {
+   
+    if(flagIndex !== -1)
+    {
+        output = process.argv[flagIndex + 1];
+    }
+     else{
+         throw error()
+     };
+}
+catch(error){
+    console.log('wrong config');
 
+}
 
-export{ operations, input, output };
+module.exports ={ operations, input, output };
