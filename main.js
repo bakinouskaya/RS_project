@@ -1,54 +1,72 @@
 
-let operations = '', input = '', output = '';
-
+let operations, input, output;
+const commandLine = process.argv;
 
 let flagIndex;
-flagIndex = process.argv.indexOf('-c');
-try {
-   
-    if(flagIndex !== -1 || process.argv[flagIndex + 1].length > 0 
-    ){
-        operations = process.argv[flagIndex + 1].split('-')
+
+function FindConfig(text){
+    flagIndex = text.indexOf('-c');
+    // text.indexOf('-c')
+    try {
+       
+        if(flagIndex !== -1 || text[flagIndex + 1].length > 0 
+        ){
+            
+            return operations = text[flagIndex + 1].split('-')
+           
+        }
+         else{
+             throw error()
+         };
     }
-     else{
-         throw error()
-     };
+    catch(error){
+        console.log('wrong config');
+
+    }
 }
-catch(error){
+FindConfig(commandLine);
 
 
-}
-flagIndex = process.argv.indexOf('-i');
-try {
+function FindInput(text){
+    flagIndex = text.indexOf('-i');
+    try {
+        
+        if(flagIndex !== -1 || text[flagIndex + 1].trim.length > 0 
+        
+        ){
+           
+            return input = text[flagIndex + 1];
+        }
+        else{
+            throw error()
+        };
     
-    if(flagIndex !== -1 || process.argv[flagIndex + 1].trim.length > 0 
-      
-    ){
-        input = process.argv[flagIndex + 1];
     }
-     else{
-         throw error()
-     };
-   
-}
-catch(error){
-    console.log('wrong config');
-
-}
-flagIndex = process.argv.indexOf('-o');
-try {
-   
-    if(flagIndex !== -1)
-    {
-        output = process.argv[flagIndex + 1];
+    catch(error){
+        console.log('wrong input');
+    
     }
-     else{
-         throw error()
-     };
 }
-catch(error){
-    console.log('wrong config');
+FindInput(commandLine);
 
+function FindOutput(text){
+    flagIndex = text.indexOf('-o');
+    try {
+       
+        if(flagIndex !== -1)
+        {
+           return output = text[flagIndex + 1];
+        }
+         else{
+             throw error()
+         };
+    }
+    catch(error){
+        console.log('wrong output');
+    
+    }
 }
+FindOutput(commandLine);
 
-module.exports ={ operations, input, output };
+
+module.exports ={ FindInput, FindOutput, FindConfig, operations, input, output };
