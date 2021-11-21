@@ -1,16 +1,72 @@
 
 let operations, input, output;
+const commandLine = process.argv;
+
+let flagIndex;
+
+function FindConfig(text){
+    flagIndex = text.indexOf('-c');
+    // text.indexOf('-c')
+    try {
+       
+        if(flagIndex !== -1 || text[flagIndex + 1].length > 0 
+        ){
+            
+            return operations = text[flagIndex + 1].split('-')
+           
+        }
+         else{
+             throw error()
+         };
+    }
+    catch(error){
+        console.log('wrong config');
+
+    }
+}
+FindConfig(commandLine);
 
 
-let flagIndex = process.argv.indexOf('-c');
-flagIndex !== -1? operations = process.argv[flagIndex + 1].split('-'): operations;
+function FindInput(text){
+    flagIndex = text.indexOf('-i');
+    try {
+        
+        if(flagIndex !== -1 || text[flagIndex + 1].trim.length > 0 
+        
+        ){
+           
+            return input = text[flagIndex + 1];
+        }
+        else{
+            throw error()
+        };
+    
+    }
+    catch(error){
+        console.log('wrong input');
+    
+    }
+}
+FindInput(commandLine);
+
+function FindOutput(text){
+    flagIndex = text.indexOf('-o');
+    try {
+       
+        if(flagIndex !== -1)
+        {
+           return output = text[flagIndex + 1];
+        }
+         else{
+             throw error()
+         };
+    }
+    catch(error){
+        console.log('wrong output');
+    
+    }
+}
+FindOutput(commandLine);
 
 
-flagIndex = process.argv.indexOf('-i');
-flagIndex !== -1? input = process.argv[flagIndex + 1]:input;
-
-flagIndex = process.argv.indexOf('-o');
-flagIndex !== -1? output = process.argv[flagIndex + 1]: output;
-
-
-export{ operations, input, output };
+module.exports ={ FindInput, FindOutput, FindConfig, operations, input, output };
